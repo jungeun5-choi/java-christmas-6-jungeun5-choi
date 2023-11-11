@@ -11,25 +11,16 @@ import java.util.List;
 public class InitializeMenuController implements Controllable {
     @Override
     public void process() {
-        MenuBoard menuBoard = initialize();
-        for (Menu menu : menuBoard.getMenus()) {
-            System.out.println(menu.menuType());
-            for (int i = 0; i < menu.foods().size(); i++) {
-                System.out.print("이름: " + menu.foods().get(i).name());
-                System.out.print(" / 가격: " + menu.foods().get(i).price());
-                System.out.println();
-            }
-            System.out.println();
-        }
+        MenuBoard menuBoard = new MenuBoard(initialize());
     }
 
-    private MenuBoard initialize() {
+    private List<Menu> initialize() {
         List<Menu> menus = new ArrayList<>();
         menus.add(initializeAppetizer());
         menus.add(initializeMain());
         menus.add(initializeDessert());
         menus.add(initializeDrink());
-        return new MenuBoard(menus);
+        return menus;
     }
 
     private Menu initializeAppetizer() {

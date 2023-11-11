@@ -11,10 +11,10 @@ import java.util.List;
 public class InitializeDateController implements Controllable {
     @Override
     public void process() {
-        Date date = initialize();
+        Date date = new Date(initialize());
     }
 
-    private Date initialize() {
+    private List<Day> initialize() {
         List<Day> days = new ArrayList<>();
         LocalDate date = LocalDate.of(2023, 12, 1);
         LocalDate end = date.plusMonths(1);
@@ -23,7 +23,7 @@ public class InitializeDateController implements Controllable {
             days.add(new Day(isWeekend(date), hasStar(date)));
         }
 
-        return new Date(days);
+        return days;
     }
 
     private boolean isWeekend(LocalDate date) {
