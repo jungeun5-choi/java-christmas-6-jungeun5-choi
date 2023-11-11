@@ -16,16 +16,11 @@ public class InitializeDateController implements Controllable {
 
     private Date initialize() {
         List<Day> days = new ArrayList<>();
-
         LocalDate date = LocalDate.of(2023, 12, 1);
         LocalDate end = date.plusMonths(1);
 
         for (; date.isBefore(end); date = date.plusDays(1)) {
             days.add(new Day(isWeekend(date), hasStar(date)));
-
-            System.out.print("date: " + date);
-            System.out.print(" / isWeekend: " + isWeekend(date));
-            System.out.println(" / hasStar: " + hasStar(date));
         }
 
         return new Date(days);
