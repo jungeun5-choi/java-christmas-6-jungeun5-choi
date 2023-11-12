@@ -1,4 +1,4 @@
-package christmas.date.domain;
+package christmas.date.model;
 
 import java.util.List;
 

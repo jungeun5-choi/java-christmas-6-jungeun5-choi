@@ -1,4 +1,4 @@
-package christmas.menu.domain;
+package christmas.menu.model;
 
 import christmas.util.enumerator.MenuType;
 import java.util.List;

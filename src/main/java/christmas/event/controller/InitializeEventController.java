@@ -1,7 +1,7 @@
 package christmas.event.controller;
 
-import christmas.event.domain.Event;
-import christmas.event.domain.EventPlan;
+import christmas.event.model.Event;
+import christmas.event.model.EventPlan;
 import christmas.util.Controllable;
 import christmas.util.enumerator.EventType;
 import java.util.ArrayList;

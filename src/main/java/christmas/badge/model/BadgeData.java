@@ -1,4 +1,4 @@
-package christmas.badge.domain;
+package christmas.badge.model;
 
 import christmas.util.enumerator.BadgeType;
 

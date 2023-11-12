@@ -1,4 +1,4 @@
-package christmas.event.domain;
+package christmas.event.model;
 
 import java.util.List;
 

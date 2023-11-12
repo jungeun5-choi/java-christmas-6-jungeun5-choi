@@ -1,7 +1,7 @@
 package christmas.badge.controller;
 
-import christmas.badge.domain.Badge;
-import christmas.badge.domain.BadgeData;
+import christmas.badge.model.Badge;
+import christmas.badge.model.BadgeData;
 import christmas.util.Controllable;
 import christmas.util.enumerator.BadgeType;
 import java.util.ArrayList;

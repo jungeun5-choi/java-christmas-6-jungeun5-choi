@@ -1,4 +1,4 @@
-package christmas.menu.domain;
+package christmas.menu.model;
 
 public record Food(
         String name,

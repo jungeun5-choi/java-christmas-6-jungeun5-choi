@@ -1,7 +1,7 @@
 package christmas.date.controller;
 
-import christmas.date.domain.Date;
-import christmas.date.domain.Day;
+import christmas.date.model.Date;
+import christmas.date.model.Day;
 import christmas.util.Controllable;
 import java.time.DayOfWeek;
 import java.time.LocalDate;

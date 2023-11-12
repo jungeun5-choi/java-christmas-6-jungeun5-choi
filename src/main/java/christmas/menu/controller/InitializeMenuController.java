@@ -1,8 +1,8 @@
 package christmas.menu.controller;
 
-import christmas.menu.domain.Food;
-import christmas.menu.domain.Menu;
-import christmas.menu.domain.MenuBoard;
+import christmas.menu.model.Food;
+import christmas.menu.model.Menu;
+import christmas.menu.model.MenuBoard;
 import christmas.util.Controllable;
 import christmas.util.enumerator.MenuType;
 import java.util.ArrayList;
