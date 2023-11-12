@@ -1,4 +1,4 @@
-package christmas.util.enumerator;
+package christmas.common.enumerator;
 
 public enum BadgeType {
     STAR("별"),

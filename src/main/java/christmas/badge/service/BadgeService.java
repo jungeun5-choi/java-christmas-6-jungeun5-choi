@@ -2,7 +2,7 @@ package christmas.badge.service;
 
 import christmas.badge.model.Badge;
 import christmas.badge.model.BadgeData;
-import christmas.util.enumerator.BadgeType;
+import christmas.common.enumerator.BadgeType;
 import java.util.ArrayList;
 import java.util.List;
 

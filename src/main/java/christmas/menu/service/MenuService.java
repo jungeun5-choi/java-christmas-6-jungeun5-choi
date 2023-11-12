@@ -3,21 +3,21 @@ package christmas.menu.service;
 import christmas.menu.model.FoodData;
 import christmas.menu.model.Menu;
 import christmas.menu.model.MenuData;
-import christmas.util.enumerator.MenuType;
+import christmas.common.enumerator.MenuType;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MenuService {
     public Menu createMenu() {
         List<MenuData> menuData = new ArrayList<>();
-        menuData.add(initializeAppetizer());
-        menuData.add(initializeMain());
-        menuData.add(initializeDessert());
-        menuData.add(initializeDrink());
+        menuData.add(createAppetizer());
+        menuData.add(createMain());
+        menuData.add(createDessert());
+        menuData.add(createDrink());
         return new Menu(menuData);
     }
 
-    private MenuData initializeAppetizer() {
+    private MenuData createAppetizer() {
         List<FoodData> appetizers = new ArrayList<>();
         appetizers.add(new FoodData("양송이수프", 6000));
         appetizers.add(new FoodData("타파스", 5500));
@@ -25,7 +25,7 @@ public class MenuService {
         return new MenuData(MenuType.Appetizer, appetizers);
     }
 
-    private MenuData initializeMain() {
+    private MenuData createMain() {
         List<FoodData> mains = new ArrayList<>();
         mains.add(new FoodData("티본스테이크", 55000));
         mains.add(new FoodData("바비큐립", 54000));
@@ -34,14 +34,14 @@ public class MenuService {
         return new MenuData(MenuType.Main, mains);
     }
 
-    private MenuData initializeDessert() {
+    private MenuData createDessert() {
         List<FoodData> desserts = new ArrayList<>();
         desserts.add(new FoodData("초코케이크", 15000));
         desserts.add(new FoodData("아이스크림", 5000));
         return new MenuData(MenuType.Dessert, desserts);
     }
 
-    private MenuData initializeDrink() {
+    private MenuData createDrink() {
         List<FoodData> drinks = new ArrayList<>();
         drinks.add(new FoodData("제로콜라", 3000));
         drinks.add(new FoodData("레드와인", 60000));

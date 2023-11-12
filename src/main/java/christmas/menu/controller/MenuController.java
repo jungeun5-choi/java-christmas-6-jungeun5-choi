@@ -1,15 +1,30 @@
 package christmas.menu.controller;
 
+import christmas.common.Controller;
+import christmas.common.enumerator.ApplicationState;
+import christmas.menu.model.Menu;
+import christmas.menu.model.MenuData;
 import christmas.menu.service.MenuService;
 
-public class MenuController {
+public class MenuController extends Controller {
     private final MenuService menuService;
 
     public MenuController(MenuService menuService) {
         this.menuService = menuService;
+        stateActions.put(ApplicationState.CREATE, this::create);
     }
 
-    public void createMenu() {
-        menuService.createMenu();
+    @Override
+    public void create() {
+        Menu menu = menuService.createMenu();
+        for (MenuData data : menu.getMenus()) {
+            System.out.println(data.menuType());
+            for (int i = 0; i < data.foodData().size(); i++) {
+                System.out.print("이름: " + data.foodData().get(i).name());
+                System.out.print(" / 가격: " + data.foodData().get(i).price());
+                System.out.println();
+            }
+            System.out.println();
+        }
     }
 }

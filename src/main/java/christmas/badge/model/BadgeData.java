@@ -1,6 +1,6 @@
 package christmas.badge.model;
 
-import christmas.util.enumerator.BadgeType;
+import christmas.common.enumerator.BadgeType;
 
 public record BadgeData(
         BadgeType type,

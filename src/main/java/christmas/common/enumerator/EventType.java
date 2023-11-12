@@ -1,4 +1,4 @@
-package christmas.util.enumerator;
+package christmas.common.enumerator;
 
 public enum EventType {
     CHRISTMAS_D_DAY("크리스마스 디데이 할인"),

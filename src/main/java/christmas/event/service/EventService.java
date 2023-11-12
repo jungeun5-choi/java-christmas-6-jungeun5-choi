@@ -2,7 +2,7 @@ package christmas.event.service;
 
 import christmas.event.model.Event;
 import christmas.event.model.EventData;
-import christmas.util.enumerator.EventType;
+import christmas.common.enumerator.EventType;
 import java.util.ArrayList;
 import java.util.List;
 

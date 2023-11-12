@@ -1,6 +1,6 @@
 package christmas.event.model;
 
-import christmas.util.enumerator.EventType;
+import christmas.common.enumerator.EventType;
 
 public record EventData(
         EventType eventType,

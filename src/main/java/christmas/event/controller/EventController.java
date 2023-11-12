@@ -1,15 +1,19 @@
 package christmas.event.controller;
 
+import christmas.common.Controller;
+import christmas.common.enumerator.ApplicationState;
 import christmas.event.service.EventService;
 
-public class EventController {
+public class EventController extends Controller {
     private final EventService eventService;
 
     public EventController(EventService eventService) {
         this.eventService = eventService;
+        stateActions.put(ApplicationState.CREATE, this::create);
     }
 
-    public void createEvent() {
+    @Override
+    public void create() {
         eventService.createEvent();
     }
 }

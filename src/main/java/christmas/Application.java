@@ -1,8 +1,13 @@
 package christmas;
 
+import christmas.common.ApplicationContext;
+import christmas.common.MainController;
+
 public class Application {
     public static void main(String[] args) {
-        MainController mainController = new MainController();
-        mainController.run();
+        ApplicationContext applicationContext = new ApplicationContext();
+
+        MainController mainController = applicationContext.InitializeController();
+        mainController.start();
     }
 }
