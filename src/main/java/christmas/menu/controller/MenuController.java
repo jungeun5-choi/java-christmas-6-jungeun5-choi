@@ -2,7 +2,7 @@ package christmas.menu.controller;
 
 import christmas.common.Controller;
 import christmas.common.enumerator.ApplicationState;
-import christmas.menu.model.Menu;
+import christmas.menu.model.MenuBoard;
 import christmas.menu.model.MenuData;
 import christmas.menu.service.MenuService;
 
@@ -16,8 +16,8 @@ public class MenuController extends Controller {
 
     @Override
     public void create() {
-        Menu menu = menuService.createMenu();
-        for (MenuData data : menu.getMenus()) {
+        MenuBoard menuBoard = menuService.createMenu();
+        for (MenuData data : menuBoard.getMenus()) {
             System.out.println(data.menuType());
             for (int i = 0; i < data.foodData().size(); i++) {
                 System.out.print("이름: " + data.foodData().get(i).name());

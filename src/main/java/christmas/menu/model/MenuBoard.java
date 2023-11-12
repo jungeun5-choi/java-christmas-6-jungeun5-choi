@@ -2,10 +2,10 @@ package christmas.menu.model;
 
 import java.util.List;
 
-public class Menu {
+public class MenuBoard {
     private final List<MenuData> menuData;
 
-    public Menu(List<MenuData> menuData) {
+    public MenuBoard(List<MenuData> menuData) {
         this.menuData = menuData;
     }
 

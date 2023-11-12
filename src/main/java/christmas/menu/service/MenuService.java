@@ -1,20 +1,20 @@
 package christmas.menu.service;
 
 import christmas.menu.model.FoodData;
-import christmas.menu.model.Menu;
+import christmas.menu.model.MenuBoard;
 import christmas.menu.model.MenuData;
 import christmas.common.enumerator.MenuType;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MenuService {
-    public Menu createMenu() {
+    public MenuBoard createMenu() {
         List<MenuData> menuData = new ArrayList<>();
         menuData.add(createAppetizer());
         menuData.add(createMain());
         menuData.add(createDessert());
         menuData.add(createDrink());
-        return new Menu(menuData);
+        return new MenuBoard(menuData);
     }
 
     private MenuData createAppetizer() {
