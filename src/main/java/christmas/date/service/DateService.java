@@ -1,7 +1,7 @@
 package christmas.date.service;
 
 import christmas.date.model.Date;
-import christmas.date.model.Day;
+import christmas.date.model.DayData;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,15 +9,15 @@ import java.util.List;
 
 public class DateService {
     public Date createDate() {
-        List<Day> days = new ArrayList<>();
+        List<DayData> dayData = new ArrayList<>();
         LocalDate date = LocalDate.of(2023, 12, 1);
         LocalDate end = date.plusMonths(1);
 
         for (; date.isBefore(end); date = date.plusDays(1)) {
-            days.add(new Day(isWeekend(date), hasStar(date)));
+            dayData.add(new DayData(isWeekend(date), hasStar(date)));
         }
 
-        return new Date(days);
+        return new Date(dayData);
     }
 
     private boolean isWeekend(LocalDate date) {

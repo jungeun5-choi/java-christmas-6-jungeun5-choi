@@ -3,9 +3,9 @@ package christmas.date.model;
 import java.util.List;
 
 public class Date {
-    private final List<Day> days;
+    private final List<DayData> dayData;
 
-    public Date(List<Day> days) {
-        this.days = days;
+    public Date(List<DayData> dayData) {
+        this.dayData = dayData;
     }
 }

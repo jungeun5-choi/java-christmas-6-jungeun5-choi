@@ -1,6 +1,6 @@
 package christmas.date.model;
 
-public record Day(
+public record DayData(
         boolean isWeekend,
         boolean hasStar) {
 }
