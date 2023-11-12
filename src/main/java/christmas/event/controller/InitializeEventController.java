@@ -16,20 +16,11 @@ public class InitializeEventController implements Controllable {
     @Override
     public void process() {
         EventPlan eventPlan = new EventPlan(initialize());
-        for (Event event : eventPlan.getEvents()) {
-            System.out.print(event.eventType());
-            System.out.print("\t/\t" + event.name());
-            System.out.print("\t/\t" + event.discount());
-            System.out.print("\t/\t" + event.discountIncreasePerDay());
-            System.out.print("\t/\t" + event.reward());
-            System.out.print("\t/\t" + event.endDay());
-            System.out.println();
-        }
     }
 
     private List<Event> initialize() {
         List<Event> events = new ArrayList<>();
-        events.add(new Event(EventType.CHRISTMAS_DDAY, "크리스마스 디데이 할인", 1000, 100, "증정 없음", DECEMBER_CHRISTMAS));
+        events.add(new Event(EventType.CHRISTMAS_D_DAY, "크리스마스 디데이 할인", 1000, 100, "증정 없음", DECEMBER_CHRISTMAS));
         events.add(new Event(EventType.WEEKDAY, "평일 할인", 2023, 0, "증정 없음", DECEMBER_LAST));
         events.add(new Event(EventType.WEEKEND, "주말 할인", 2023, 0, "증정 없음", DECEMBER_LAST));
         events.add(new Event(EventType.SPECIAL, "특별 할인", 1000, 0, "증정 없음", DECEMBER_LAST));
