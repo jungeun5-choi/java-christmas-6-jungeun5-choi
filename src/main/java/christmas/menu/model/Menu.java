@@ -1,9 +1,15 @@
 package christmas.menu.model;
 
-import christmas.util.enumerator.MenuType;
 import java.util.List;
 
-public record Menu(
-        MenuType menuType,
-        List<Food> foods) {
+public class Menu {
+    private final List<MenuData> menuData;
+
+    public Menu(List<MenuData> menuData) {
+        this.menuData = menuData;
+    }
+
+    public List<MenuData> getMenus() {
+        return menuData;
+    }
 }

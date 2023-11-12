@@ -1,13 +1,15 @@
 package christmas.event.model;
 
-import christmas.util.enumerator.EventType;
+import java.util.List;
 
-public record Event(
-        EventType eventType,
-        String name,
-        int discount,
-        int discountIncreasePerDay,
-        String reward,
-        int endDay) {
+public class Event {
+    private final List<EventData> eventData;
 
+    public Event(List<EventData> eventData) {
+        this.eventData = eventData;
+    }
+
+    public List<EventData> getEvents() {
+        return eventData;
+    }
 }

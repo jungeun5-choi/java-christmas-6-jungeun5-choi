@@ -1,20 +1,14 @@
-package christmas.date.controller;
+package christmas.date.service;
 
 import christmas.date.model.Date;
 import christmas.date.model.Day;
-import christmas.util.Controllable;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InitializeDateController implements Controllable {
-    @Override
-    public void process() {
-        Date date = new Date(initialize());
-    }
-
-    private List<Day> initialize() {
+public class DateService {
+    public Date createDate() {
         List<Day> days = new ArrayList<>();
         LocalDate date = LocalDate.of(2023, 12, 1);
         LocalDate end = date.plusMonths(1);
@@ -23,7 +17,7 @@ public class InitializeDateController implements Controllable {
             days.add(new Day(isWeekend(date), hasStar(date)));
         }
 
-        return days;
+        return new Date(days);
     }
 
     private boolean isWeekend(LocalDate date) {
