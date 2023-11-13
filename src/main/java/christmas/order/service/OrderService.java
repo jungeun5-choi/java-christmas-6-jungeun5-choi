@@ -1,6 +1,5 @@
 package christmas.order.service;
 
-import christmas.common.enumerator.ApplicationState;
 import christmas.menu.model.MenuData;
 import christmas.menu.repository.MenuRepository;
 import christmas.order.dto.OrderDto;
@@ -20,11 +19,6 @@ public class OrderService {
     public void save(int visitDay, Map<String, Integer> orders) {
         int totalAmount = calculateTotalAmount(orders);
         orderRepository.save(new OrderData(visitDay, orders, totalAmount));
-    }
-
-    public void process() {
-        // 주문 처리 로직 구현
-        System.out.println(ApplicationState.PROCESS_ORDER);
     }
 
     public OrderDto present() {

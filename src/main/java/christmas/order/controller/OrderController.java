@@ -18,7 +18,6 @@ public class OrderController extends Controller {
         this.outputView = outputView;
 
         stateActions.put(ApplicationState.RECEIVE_ORDER_DATA, this::receive);
-        stateActions.put(ApplicationState.PROCESS_ORDER, this::order);
         stateActions.put(ApplicationState.PRESENT_ORDER_DATA, this::present);
     }
 
@@ -26,10 +25,6 @@ public class OrderController extends Controller {
         int visitDay = inputView.readVisitDay();
         Map<String, Integer> orders = inputView.readOrderList();
         orderService.save(visitDay, orders);
-    }
-
-    public void order() {
-        orderService.process();
     }
 
     public void present() {

@@ -10,16 +10,16 @@ public enum ApplicationState {
     RECEIVE_ORDER_DATA {
         @Override
         public ApplicationState next() {
-            return PROCESS_ORDER;
-        }
-    },
-    PROCESS_ORDER {
-        @Override
-        public ApplicationState next() {
             return PRESENT_ORDER_DATA;
         }
     },
     PRESENT_ORDER_DATA {
+        @Override
+        public ApplicationState next() {
+            return PROCESS_EVENT_PLANNER;
+        }
+    },
+    PROCESS_EVENT_PLANNER {
         @Override
         public ApplicationState next() {
             return PRESENT_EVENT_PLANNER;

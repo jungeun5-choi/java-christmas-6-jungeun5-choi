@@ -9,6 +9,8 @@ import christmas.date.controller.DateController;
 import christmas.date.service.DateService;
 import christmas.event.controller.EventController;
 import christmas.event.service.EventService;
+import christmas.eventPlanner.controller.EventPlannerController;
+import christmas.eventPlanner.service.EventPlannerService;
 import christmas.menu.controller.MenuController;
 import christmas.menu.repository.MenuRepository;
 import christmas.menu.service.MenuService;
@@ -24,6 +26,7 @@ public class ApplicationContext {
     private MenuService menuService;
     private BadgeService badgeService;
     private OrderService orderService;
+    private EventPlannerService eventPlannerService;
 
     public ApplicationContext() {
         initializeRepository();
@@ -41,6 +44,7 @@ public class ApplicationContext {
         menuService = new MenuService(menuRepository);
         badgeService = new BadgeService();
         orderService = new OrderService(orderRepository, menuRepository);
+        eventPlannerService = new EventPlannerService();
     }
 
     public MainController InitializeController() {
@@ -50,6 +54,9 @@ public class ApplicationContext {
         BadgeController badgeController = new BadgeController(badgeService);
         OrderController orderController = new OrderController(orderService, InputView.getInstance(),
                 OutputView.getInstance());
-        return new MainController(dateController, eventController, menuController, badgeController, orderController);
+        EventPlannerController eventPlannerController = new EventPlannerController(eventPlannerService,
+                OutputView.getInstance());
+        return new MainController(dateController, eventController, menuController, badgeController, orderController,
+                eventPlannerController);
     }
 }

@@ -4,6 +4,7 @@ import christmas.badge.controller.BadgeController;
 import christmas.common.enumerator.ApplicationState;
 import christmas.date.controller.DateController;
 import christmas.event.controller.EventController;
+import christmas.eventPlanner.controller.EventPlannerController;
 import christmas.menu.controller.MenuController;
 import christmas.order.controller.OrderController;
 import java.util.Arrays;
@@ -15,13 +16,14 @@ public class MainController {
     private Map<ApplicationState, List<Controller>> controllers = new HashMap<>();
 
     public MainController(DateController dateController, EventController eventController, MenuController menuController,
-                          BadgeController badgeController, OrderController orderController) {
+                          BadgeController badgeController, OrderController orderController,
+                          EventPlannerController eventPlannerController) {
         controllers.put(ApplicationState.CREATE_DATA,
                 Arrays.asList(dateController, eventController, menuController, badgeController));
         controllers.put(ApplicationState.RECEIVE_ORDER_DATA, Arrays.asList(orderController));
-        controllers.put(ApplicationState.PROCESS_ORDER, Arrays.asList(orderController));
         controllers.put(ApplicationState.PRESENT_ORDER_DATA, Arrays.asList(orderController));
-        controllers.put(ApplicationState.PRESENT_EVENT_PLANNER, Arrays.asList(orderController));
+        controllers.put(ApplicationState.PROCESS_EVENT_PLANNER, Arrays.asList(eventPlannerController));
+        controllers.put(ApplicationState.PRESENT_EVENT_PLANNER, Arrays.asList(eventPlannerController));
     }
 
     public void start() {
