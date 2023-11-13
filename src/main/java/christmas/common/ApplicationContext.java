@@ -10,11 +10,15 @@ import christmas.date.service.DateService;
 import christmas.event.controller.EventController;
 import christmas.event.service.EventService;
 import christmas.menu.controller.MenuController;
+import christmas.menu.repository.MenuRepository;
 import christmas.menu.service.MenuService;
 import christmas.order.controller.OrderController;
+import christmas.order.repository.OrderRepository;
 import christmas.order.service.OrderService;
 
 public class ApplicationContext {
+    private MenuRepository menuRepository;
+    private OrderRepository orderRepository;
     private DateService dateService;
     private EventService eventService;
     private MenuService menuService;
@@ -22,11 +26,21 @@ public class ApplicationContext {
     private OrderService orderService;
 
     public ApplicationContext() {
+        initializeRepository();
+        initializeService();
+    }
+
+    private void initializeRepository() {
+        menuRepository = new MenuRepository();
+        orderRepository = new OrderRepository();
+    }
+
+    private void initializeService() {
         dateService = new DateService();
         eventService = new EventService();
-        menuService = new MenuService();
+        menuService = new MenuService(menuRepository);
         badgeService = new BadgeService();
-        orderService = new OrderService();
+        orderService = new OrderService(orderRepository, menuRepository);
     }
 
     public MainController InitializeController() {
@@ -34,7 +48,8 @@ public class ApplicationContext {
         EventController eventController = new EventController(eventService);
         MenuController menuController = new MenuController(menuService);
         BadgeController badgeController = new BadgeController(badgeService);
-        OrderController orderController = new OrderController(orderService, InputView.getInstance(), OutputView.getInstance());
+        OrderController orderController = new OrderController(orderService, InputView.getInstance(),
+                OutputView.getInstance());
         return new MainController(dateController, eventController, menuController, badgeController, orderController);
     }
 }

@@ -3,8 +3,6 @@ package christmas.menu.controller;
 import christmas.common.controller.Controller;
 import christmas.common.controller.Initializable;
 import christmas.common.enumerator.ApplicationState;
-import christmas.menu.model.MenuBoard;
-import christmas.menu.model.MenuData;
 import christmas.menu.service.MenuService;
 
 public class MenuController extends Controller implements Initializable {
