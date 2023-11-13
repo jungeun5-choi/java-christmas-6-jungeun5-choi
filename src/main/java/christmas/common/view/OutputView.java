@@ -38,6 +38,10 @@ public class OutputView {
         System.out.printf(Message.PRINT_TOTAL_ORDER_AMOUNT.message, orderDto.getTotalOrderAmount());
     }
 
+    public void printExceptionMessage(Exception exception) {
+        System.out.println(exception.getMessage());
+    }
+
     private enum Message {
         PRINT_WELCOME("안녕하세요! 우테코 식당 %s월 이벤트 플래너입니다.\n"),
         PRINT_ADVANTAGE_PREVIEW("%s월 %s일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n"),

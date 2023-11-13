@@ -22,9 +22,14 @@ public class OrderController extends Controller {
     }
 
     public void receive() {
-        int visitDay = inputView.readVisitDay();
-        Map<String, Integer> orders = inputView.readOrderList();
-        orderService.save(visitDay, orders);
+        try {
+            int visitDay = inputView.readVisitDay();
+            Map<String, Integer> orders = inputView.readOrderList();
+            orderService.save(visitDay, orders);
+        } catch (IllegalArgumentException exception) {
+            outputView.printExceptionMessage(exception);
+            receive();
+        }
     }
 
     public void present() {

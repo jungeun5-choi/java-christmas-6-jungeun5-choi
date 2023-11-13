@@ -1,6 +1,7 @@
 package christmas.common.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.common.enumerator.ExceptionMessage;
 import christmas.common.util.Util;
 import java.util.Map;
 
@@ -14,8 +15,12 @@ public class InputView {
     private static final int MONTH = 12;
 
     public int readVisitDay() {
-        System.out.printf(Message.INPUT_VISIT_DAY.message, MONTH);
-        return Util.convertStringToInt(Console.readLine());
+        try {
+            System.out.printf(Message.INPUT_VISIT_DAY.message, MONTH);
+            return Integer.parseInt(Console.readLine());
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_DAY_FORMAT.getMessage());
+        }
     }
 
     public Map<String, Integer> readOrderList() {

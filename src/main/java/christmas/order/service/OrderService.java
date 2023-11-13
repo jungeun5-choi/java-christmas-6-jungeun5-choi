@@ -17,12 +17,18 @@ public class OrderService {
     }
 
     public void save(int visitDay, Map<String, Integer> orders) {
-        int totalAmount = calculateTotalAmount(orders);
-        orderRepository.save(new OrderData(visitDay, orders, totalAmount));
+        orderRepository.save(new OrderData(visitDay, orders));
     }
 
     public OrderDto present() {
         return convertToDto();
+    }
+
+    private OrderDto convertToDto() {
+        int visitDay = orderRepository.findOrder().visitDay();
+        Map<String, Integer> orders = orderRepository.findOrder().orders();
+        int totalAmount = calculateTotalAmount(orderRepository.findOrder().orders());
+        return new OrderDto(visitDay, orders, totalAmount);
     }
 
     private int calculateTotalAmount(Map<String, Integer> orders) {
@@ -32,12 +38,5 @@ public class OrderService {
             total += menuData.price() * orders.get(menuName);
         }
         return total;
-    }
-
-    private OrderDto convertToDto() {
-        int visitDay = orderRepository.findOrder().visitDay();
-        Map<String, Integer> orders = orderRepository.findOrder().orders();
-        int totalAmount = orderRepository.findOrder().totalAmount();
-        return new OrderDto(visitDay, orders, totalAmount);
     }
 }
