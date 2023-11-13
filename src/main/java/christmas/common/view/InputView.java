@@ -13,7 +13,7 @@ public class InputView {
         return instance;
     }
 
-    private static final Pattern REGEX_ORDER_FORMAT = Pattern.compile("\\w+-\\w+(,\\w+-\\w+)*");
+    private static final Pattern REGEX_ORDER_FORMAT = Pattern.compile("\\w+-\\w");
     private static final int MONTH = 12;
 
     public int readVisitDay() {
@@ -28,16 +28,8 @@ public class InputView {
     public Map<String, Integer> readOrderList() {
         try {
             System.out.printf(Message.INPUT_ORDER_MENU_AND_COUNT.message);
-            String input = Console.readLine();
-            validateOrderFormat(input);
-            return Util.separateStringWithCommaAndHyphen(input);
-        } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_FORMAT.getMessage());
-        }
-    }
-
-    private void validateOrderFormat(String input) {
-        if (!input.matches(String.valueOf(REGEX_ORDER_FORMAT))) {
+            return Util.separateStringWithCommaAndHyphen(Console.readLine());
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException exception) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_FORMAT.getMessage());
         }
     }
