@@ -10,7 +10,6 @@ public class DateController extends Controller implements Initializable {
 
     public DateController(DateService dateService) {
         this.dateService = dateService;
-        setState(ApplicationState.CREATE_DATA);
         stateActions.put(ApplicationState.CREATE_DATA, this::initialize);
     }
 

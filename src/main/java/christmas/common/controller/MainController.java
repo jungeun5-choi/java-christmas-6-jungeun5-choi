@@ -20,23 +20,22 @@ public class MainController {
                 Arrays.asList(dateController, eventController, menuController, badgeController));
         controllers.put(ApplicationState.RECEIVE_ORDER_DATA, Arrays.asList(orderController));
         controllers.put(ApplicationState.PROCESS_ORDER, Arrays.asList(orderController));
+        controllers.put(ApplicationState.PRESENT_ORDER_DATA, Arrays.asList(orderController));
+        controllers.put(ApplicationState.PRESENT_EVENT_PLANNER, Arrays.asList(orderController));
     }
 
     public void start() {
-        ApplicationState currentState = setStartingState(ApplicationState.RECEIVE_ORDER_DATA);
-        run(currentState);
-    }
-
-    private void run(ApplicationState currentState) {
-        for (Controller controller : controllers.get(currentState)) {
-            controller.executeState();
+        ApplicationState currentState = ApplicationState.CREATE_DATA;
+        while (currentState.isAvailable()) {
+            currentState = run(currentState);
         }
     }
 
-    private ApplicationState setStartingState(ApplicationState currentState) {
+    private ApplicationState run(ApplicationState currentState) {
         for (Controller controller : controllers.get(currentState)) {
             controller.setState(currentState);
+            controller.executeState();
         }
-        return currentState;
+        return currentState.next();
     }
 }
