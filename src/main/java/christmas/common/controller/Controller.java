@@ -1,4 +1,4 @@
-package christmas.common;
+package christmas.common.controller;
 
 import christmas.common.enumerator.ApplicationState;
 import java.util.HashMap;
@@ -18,6 +18,4 @@ public abstract class Controller {
             action.run();
         }
     }
-
-    public abstract void create();
 }

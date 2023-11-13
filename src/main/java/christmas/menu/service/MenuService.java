@@ -1,51 +1,28 @@
 package christmas.menu.service;
 
-import christmas.menu.model.FoodData;
-import christmas.menu.model.MenuBoard;
-import christmas.menu.model.MenuData;
 import christmas.common.enumerator.MenuType;
-import java.util.ArrayList;
-import java.util.List;
+import christmas.menu.model.MenuData;
+import christmas.menu.repository.MenuRepository;
 
 public class MenuService {
-    public MenuBoard createMenu() {
-        List<MenuData> menuData = new ArrayList<>();
-        menuData.add(createAppetizer());
-        menuData.add(createMain());
-        menuData.add(createDessert());
-        menuData.add(createDrink());
-        return new MenuBoard(menuData);
+    private final MenuRepository menuRepository;
+
+    public MenuService(MenuRepository menuRepository) {
+        this.menuRepository = menuRepository;
     }
 
-    private MenuData createAppetizer() {
-        List<FoodData> appetizers = new ArrayList<>();
-        appetizers.add(new FoodData("양송이수프", 6000));
-        appetizers.add(new FoodData("타파스", 5500));
-        appetizers.add(new FoodData("시저샐러드", 8000));
-        return new MenuData(MenuType.Appetizer, appetizers);
-    }
-
-    private MenuData createMain() {
-        List<FoodData> mains = new ArrayList<>();
-        mains.add(new FoodData("티본스테이크", 55000));
-        mains.add(new FoodData("바비큐립", 54000));
-        mains.add(new FoodData("해산물파스타", 35000));
-        mains.add(new FoodData("크리스마스파스타", 25000));
-        return new MenuData(MenuType.Main, mains);
-    }
-
-    private MenuData createDessert() {
-        List<FoodData> desserts = new ArrayList<>();
-        desserts.add(new FoodData("초코케이크", 15000));
-        desserts.add(new FoodData("아이스크림", 5000));
-        return new MenuData(MenuType.Dessert, desserts);
-    }
-
-    private MenuData createDrink() {
-        List<FoodData> drinks = new ArrayList<>();
-        drinks.add(new FoodData("제로콜라", 3000));
-        drinks.add(new FoodData("레드와인", 60000));
-        drinks.add(new FoodData("샴페인", 25000));
-        return new MenuData(MenuType.Appetizer, drinks);
+    public void createMenu() {
+        menuRepository.save(new MenuData(MenuType.Appetizer,"양송이수프", 6000));
+        menuRepository.save(new MenuData(MenuType.Appetizer,"타파스", 5500));
+        menuRepository.save(new MenuData(MenuType.Appetizer,"시저샐러드", 8000));
+        menuRepository.save(new MenuData(MenuType.Main,"티본스테이크", 55000));
+        menuRepository.save(new MenuData(MenuType.Main,"바비큐립", 54000));
+        menuRepository.save(new MenuData(MenuType.Main,"해산물파스타", 35000));
+        menuRepository.save(new MenuData(MenuType.Main,"크리스마스파스타", 25000));
+        menuRepository.save(new MenuData(MenuType.Dessert,"초코케이크", 15000));
+        menuRepository.save(new MenuData(MenuType.Dessert,"아이스크림", 5000));
+        menuRepository.save(new MenuData(MenuType.Appetizer,"제로콜라", 3000));
+        menuRepository.save(new MenuData(MenuType.Appetizer,"레드와인", 60000));
+        menuRepository.save(new MenuData(MenuType.Appetizer,"샴페인", 25000));
     }
 }
