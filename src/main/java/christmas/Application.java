@@ -1,7 +1,13 @@
 package christmas;
 
+import christmas.common.ApplicationContext;
+import christmas.common.MainController;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        ApplicationContext applicationContext = new ApplicationContext();
+
+        MainController mainController = applicationContext.InitializeController();
+        mainController.start();
     }
 }
