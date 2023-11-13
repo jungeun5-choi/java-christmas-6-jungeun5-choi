@@ -1,14 +1,8 @@
 package christmas.common.enumerator;
 
-import christmas.common.Controller;
-
 public enum ApplicationState {
-    CREATE {
-        @Override
-        public void execute(Controller controller) {
-            controller.create();
-        }
-    };
-
-    public abstract void execute(Controller controller);
+    CREATE_DATA,
+    RECEIVE_ORDER_DATA,
+    PROCESS_ORDER,
+    PRESENT_ORDER_DATA;
 }
