@@ -6,6 +6,7 @@ import christmas.common.controller.MainController;
 import christmas.common.view.InputView;
 import christmas.common.view.OutputView;
 import christmas.date.controller.DateController;
+import christmas.date.repository.DateRepository;
 import christmas.date.service.DateService;
 import christmas.event.controller.EventController;
 import christmas.event.service.EventService;
@@ -19,6 +20,7 @@ import christmas.order.repository.OrderRepository;
 import christmas.order.service.OrderService;
 
 public class ApplicationContext {
+    private DateRepository dateRepository;
     private MenuRepository menuRepository;
     private OrderRepository orderRepository;
     private DateService dateService;
@@ -34,12 +36,13 @@ public class ApplicationContext {
     }
 
     private void initializeRepository() {
+        dateRepository = new DateRepository();
         menuRepository = new MenuRepository();
         orderRepository = new OrderRepository();
     }
 
     private void initializeService() {
-        dateService = new DateService();
+        dateService = new DateService(dateRepository);
         eventService = new EventService();
         menuService = new MenuService(menuRepository);
         badgeService = new BadgeService();
