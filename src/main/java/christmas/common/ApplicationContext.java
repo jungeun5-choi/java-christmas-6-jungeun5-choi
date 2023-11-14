@@ -10,9 +10,9 @@ import christmas.date.service.DateService;
 import christmas.event.controller.EventController;
 import christmas.event.repository.EventRepository;
 import christmas.event.service.EventService;
-import christmas.eventPlanner.controller.EventPlannerController;
-import christmas.eventPlanner.repository.EventPlannerRepository;
-import christmas.eventPlanner.service.EventPlannerService;
+import christmas.eventPlanner.controller.AdvantageController;
+import christmas.eventPlanner.repository.AdvantageRepository;
+import christmas.eventPlanner.service.AdvantageService;
 import christmas.menu.controller.MenuController;
 import christmas.menu.repository.MenuRepository;
 import christmas.menu.service.MenuService;
@@ -26,13 +26,13 @@ public class ApplicationContext {
     private MenuRepository menuRepository;
     private BadgeRepository badgeRepository;
     private OrderRepository orderRepository;
-    private EventPlannerRepository eventPlannerRepository;
+    private AdvantageRepository advantageRepository;
     private DateService dateService;
     private EventService eventService;
     private MenuService menuService;
     private BadgeService badgeService;
     private OrderService orderService;
-    private EventPlannerService eventPlannerService;
+    private AdvantageService advantageService;
 
     public ApplicationContext() {
         initializeRepository();
@@ -45,7 +45,7 @@ public class ApplicationContext {
         menuRepository = new MenuRepository();
         badgeRepository = new BadgeRepository();
         orderRepository = new OrderRepository();
-        eventPlannerRepository = new EventPlannerRepository();
+        advantageRepository = new AdvantageRepository();
     }
 
     private void initializeService() {
@@ -54,7 +54,7 @@ public class ApplicationContext {
         menuService = new MenuService(menuRepository);
         badgeService = new BadgeService(badgeRepository);
         orderService = new OrderService(orderRepository);
-        eventPlannerService = new EventPlannerService(eventRepository, orderRepository, eventPlannerRepository);
+        advantageService = new AdvantageService(eventRepository, orderRepository, advantageRepository);
     }
 
     public MainController InitializeController() {
@@ -63,8 +63,8 @@ public class ApplicationContext {
         MenuController menuController = new MenuController(menuService);
         BadgeController badgeController = new BadgeController(badgeService);
         OrderController orderController = new OrderController(orderService);
-        EventPlannerController eventPlannerController = new EventPlannerController(eventPlannerService);
+        AdvantageController advantageController = new AdvantageController(advantageService);
         return new MainController(dateController, eventController, menuController, badgeController, orderController,
-                eventPlannerController);
+                advantageController);
     }
 }

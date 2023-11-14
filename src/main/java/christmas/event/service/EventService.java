@@ -15,10 +15,10 @@ public class EventService {
     }
 
     public void createEvent() {
-        eventRepository.save(new EventData(EventType.CHRISTMAS_D_DAY, 1000, 100, "증정 없음", DECEMBER_CHRISTMAS));
-        eventRepository.save(new EventData(EventType.WEEKDAY, 2023, 0, "증정 없음", DECEMBER_LAST));
-        eventRepository.save(new EventData(EventType.WEEKEND, 2023, 0, "증정 없음", DECEMBER_LAST));
-        eventRepository.save(new EventData(EventType.SPECIAL, 1000, 0, "증정 없음", DECEMBER_LAST));
-        eventRepository.save(new EventData(EventType.REWARD, 25000, 0, "샴페인 1개 증정", DECEMBER_LAST));
+        eventRepository.save(new EventData(EventType.CHRISTMAS_D_DAY, "크리스마스 디데이 할인", DECEMBER_CHRISTMAS, 1000, false));
+        eventRepository.save(new EventData(EventType.WEEKDAY, "평일 할인", DECEMBER_LAST, 2023, false));
+        eventRepository.save(new EventData(EventType.WEEKEND, "주말 할인", DECEMBER_LAST, 2023, false));
+        eventRepository.save(new EventData(EventType.SPECIAL, "특별 할인", DECEMBER_LAST, 1000, false));
+        eventRepository.save(new EventData(EventType.REWARD, "증정 이벤트", DECEMBER_LAST, 25000, true));
     }
 }

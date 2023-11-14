@@ -4,8 +4,8 @@ import christmas.common.enumerator.EventType;
 
 public record EventData(
         EventType eventType,
-        int discount,
-        int discountIncreasePerDay,
-        String reward,
-        int endDay) {
+        String name,
+        int endDay,
+        int defaultDiscount,
+        boolean hasReward) {
 }

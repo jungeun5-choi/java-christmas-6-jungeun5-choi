@@ -1,19 +1,47 @@
 package christmas.common.enumerator;
 
+import christmas.date.repository.DateRepository;
+import christmas.event.repository.EventRepository;
+import christmas.order.repository.OrderRepository;
+
 public enum EventType {
-    CHRISTMAS_D_DAY("크리스마스 디데이 할인"),
-    WEEKDAY("평일 할인"),
-    WEEKEND("주말 할인"),
-    SPECIAL("특별 할인"),
-    REWARD("증정 이벤트");
+    CHRISTMAS_D_DAY {
+        @Override
+        public boolean isSatisfied() {
+            int visitDay = OrderRepository.findVisitDay();
+            int endDay = EventRepository.findEndDayByEventType(EventType.CHRISTMAS_D_DAY);
+            return visitDay <= endDay;
+        }
+    },
+    WEEKDAY {
+        @Override
+        public boolean isSatisfied() {
+            int visitDay = OrderRepository.findVisitDay();
+            return DateRepository.findIsWeekDay(visitDay);
+        }
+    },
+    WEEKEND {
+        @Override
+        public boolean isSatisfied() {
+            int visitDay = OrderRepository.findVisitDay();
+            return DateRepository.findIsWeekend(visitDay);
+        }
+    },
+    SPECIAL {
+        @Override
+        public boolean isSatisfied() {
+            int visitDay = OrderRepository.findVisitDay();
+            return DateRepository.findIsSpecialDay(visitDay);
+        }
+    },
+    REWARD {
+        @Override
+        public boolean isSatisfied() {
+            return OrderRepository.findTotalAmount() >= MIN_REQUIRED_AMOUNT_FOR_REWARD;
+        }
+    };
 
-    private final String name;
+    private static final int MIN_REQUIRED_AMOUNT_FOR_REWARD = 12000;
 
-    EventType(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
+    public abstract boolean isSatisfied();
 }

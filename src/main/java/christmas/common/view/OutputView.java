@@ -1,6 +1,9 @@
 package christmas.common.view;
 
+import christmas.common.enumerator.EventType;
+import christmas.event.model.EventData;
 import christmas.order.dto.OrderDto;
+import java.util.List;
 import java.util.Map;
 
 public class OutputView {
@@ -30,7 +33,8 @@ public class OutputView {
     private void printOrderList(OrderDto orderDto) {
         System.out.printf(Message.PRINT_ORDER_LIST_TITLE.message);
         for (Map.Entry<String, Integer> entry : orderDto.getOrders().entrySet()) {
-            System.out.printf(Message.PRINT_ORDER_LIST.message, entry.getKey(), entry.getValue());
+            System.out.printf(Message.PRINT_ORDER_LIST.message,
+                    entry.getKey(), entry.getValue());
         }
     }
 
@@ -46,6 +50,14 @@ public class OutputView {
         }
         if (!hasReward) {
             System.out.printf(Message.PRINT_ADVANTAGE_EMPTY.message);
+        }
+    }
+
+    public void printAdvantageList(List<EventData> eventData, Map<EventType, Integer> discounts) {
+        System.out.printf(Message.PRINT_ADVANTAGE_LIST_TITLE.message);
+        for (EventData event : eventData) {
+            System.out.printf(Message.PRINT_ADVANTAGE_LIST.message,
+                    event.name(), discounts.get(event.eventType()));
         }
     }
 
