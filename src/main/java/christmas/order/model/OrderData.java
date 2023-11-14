@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 public record OrderData(int visitDay, Map<String, Integer> orders) {
     private static final int MIN_DAY = 1;
     private static final int MAX_DAY = 31;
+    private static final int MAX_MENU = 20;
 
     public OrderData {
         validate(visitDay, orders);
@@ -45,20 +46,28 @@ public record OrderData(int visitDay, Map<String, Integer> orders) {
         }
     }
 
-    private void validateMenuDuplicate(Map<String, Integer> orders) {
-        Set<String> names = new HashSet<>(orders.keySet());
-        if (hasDuplicate(orders, names)) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_FORMAT.getMessage());
+    private void validateOrderLimit(Map<String, Integer> orders) {
+        checkMenuType(orders);
+        checkMenuCount(orders);
+    }
+
+    private void checkMenuType(Map<String, Integer> orders) {
+        Set<MenuType> types = findAllTypesFromOrders(orders);
+        if (hasOnlyDrink(types)) {
+            throw new IllegalArgumentException(ExceptionMessage.ANNOUNCE_ORDER_LIMIT_TYPE.getMessage());
         }
     }
 
-    private boolean hasDuplicate(Map<String, Integer> orders, Set<String> names) {
-        return names.size() < orders.size();
+    private void checkMenuCount(Map<String, Integer> orders) {
+        int menuCount = calculateMenuCounts(orders);
+        if (menuCount > MAX_MENU) {
+            throw new IllegalArgumentException(ExceptionMessage.ANNOUNCE_ORDER_LIMIT_COUNT.getMessage());
+        }
     }
 
-    private void validateOrderLimit(Map<String, Integer> orders) {
-        Set<MenuType> types = findAllTypesFromOrders(orders);
-        if (hasOnlyDrink(types)) {
+    private void validateMenuDuplicate(Map<String, Integer> orders) {
+        Set<String> names = new HashSet<>(orders.keySet());
+        if (hasDuplicate(orders, names)) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_FORMAT.getMessage());
         }
     }
@@ -70,11 +79,22 @@ public record OrderData(int visitDay, Map<String, Integer> orders) {
                 .collect(Collectors.toSet());
     }
 
+    private int calculateMenuCounts(Map<String, Integer> orders) {
+        return orders.values()
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
     private MenuType findMenuTypeByName(String name) {
         return Objects.requireNonNull(MenuRepository.findMenuByName(name)).type();
     }
 
     private boolean hasOnlyDrink(Set<MenuType> types) {
         return types.contains(MenuType.Drink) && types.size() == 1;
+    }
+
+    private boolean hasDuplicate(Map<String, Integer> orders, Set<String> names) {
+        return names.size() < orders.size();
     }
 }
