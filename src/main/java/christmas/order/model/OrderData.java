@@ -1,11 +1,13 @@
 package christmas.order.model;
 
 import christmas.common.enumerator.ExceptionMessage;
-import christmas.menu.model.MenuData;
+import christmas.common.enumerator.MenuType;
 import christmas.menu.repository.MenuRepository;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public record OrderData(int visitDay, Map<String, Integer> orders) {
     private static final int MIN_DAY = 1;
@@ -18,6 +20,7 @@ public record OrderData(int visitDay, Map<String, Integer> orders) {
     private void validate(int visitDay, Map<String, Integer> orders) {
         validateVisitDay(visitDay);
         validateMenuName(orders);
+        validateOrderLimit(orders);
         if (orders.size() > 1) {
             validateMenuDuplicate(orders);
         }
@@ -51,5 +54,27 @@ public record OrderData(int visitDay, Map<String, Integer> orders) {
 
     private boolean hasDuplicate(Map<String, Integer> orders, Set<String> names) {
         return names.size() < orders.size();
+    }
+
+    private void validateOrderLimit(Map<String, Integer> orders) {
+        Set<MenuType> types = findAllTypesFromOrders(orders);
+        if (hasOnlyDrink(types)) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_FORMAT.getMessage());
+        }
+    }
+
+    private Set<MenuType> findAllTypesFromOrders(Map<String, Integer> orders) {
+        return orders.keySet()
+                .stream()
+                .map(this::findMenuTypeByName)
+                .collect(Collectors.toSet());
+    }
+
+    private MenuType findMenuTypeByName(String name) {
+        return Objects.requireNonNull(MenuRepository.findMenuByName(name)).type();
+    }
+
+    private boolean hasOnlyDrink(Set<MenuType> types) {
+        return types.contains(MenuType.Drink) && types.size() == 1;
     }
 }

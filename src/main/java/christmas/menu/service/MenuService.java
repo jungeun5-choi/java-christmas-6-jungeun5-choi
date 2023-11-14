@@ -21,8 +21,8 @@ public class MenuService {
         menuRepository.save(new MenuData(MenuType.Main,"크리스마스파스타", 25000));
         menuRepository.save(new MenuData(MenuType.Dessert,"초코케이크", 15000));
         menuRepository.save(new MenuData(MenuType.Dessert,"아이스크림", 5000));
-        menuRepository.save(new MenuData(MenuType.Appetizer,"제로콜라", 3000));
-        menuRepository.save(new MenuData(MenuType.Appetizer,"레드와인", 60000));
-        menuRepository.save(new MenuData(MenuType.Appetizer,"샴페인", 25000));
+        menuRepository.save(new MenuData(MenuType.Drink,"제로콜라", 3000));
+        menuRepository.save(new MenuData(MenuType.Drink,"레드와인", 60000));
+        menuRepository.save(new MenuData(MenuType.Drink,"샴페인", 25000));
     }
 }
