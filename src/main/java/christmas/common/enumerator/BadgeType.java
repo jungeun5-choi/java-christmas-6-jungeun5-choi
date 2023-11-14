@@ -1,33 +1,36 @@
 package christmas.common.enumerator;
 
+import christmas.badge.repository.BadgeRepository;
+
 public enum BadgeType {
-    STAR("별", 5000) {
+    STAR("별") {
         @Override
         public boolean isSatisfied(int totalDiscount) {
-            return totalDiscount >= STAR.standard
-                    && totalDiscount < TREE.standard;
+            int star = BadgeRepository.findRequiredAdvantageAmountByBadgeType(STAR);
+            int tree = BadgeRepository.findRequiredAdvantageAmountByBadgeType(TREE);
+            return totalDiscount >= star && totalDiscount < tree;
         }
     },
-    TREE("트리", 10000) {
+    TREE("트리") {
         @Override
         public boolean isSatisfied(int totalDiscount) {
-            return totalDiscount >= TREE.standard
-                    && totalDiscount < SANTA.standard;
+            int tree = BadgeRepository.findRequiredAdvantageAmountByBadgeType(TREE);
+            int santa = BadgeRepository.findRequiredAdvantageAmountByBadgeType(SANTA);
+            return totalDiscount >= tree && totalDiscount < santa;
         }
     },
-    SANTA("산타", 20000) {
+    SANTA("산타") {
         @Override
         public boolean isSatisfied(int totalDiscount) {
-            return totalDiscount >= SANTA.standard;
+            int santa = BadgeRepository.findRequiredAdvantageAmountByBadgeType(SANTA);
+            return totalDiscount >= santa;
         }
     };
 
     private final String name;
-    private final int standard;
 
-    BadgeType(String name, int standard) {
+    BadgeType(String name) {
         this.name = name;
-        this.standard = standard;
     }
 
     public String getName() {

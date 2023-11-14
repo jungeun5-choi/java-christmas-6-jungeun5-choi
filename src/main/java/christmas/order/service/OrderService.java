@@ -6,6 +6,7 @@ import christmas.order.model.OrderData;
 import christmas.order.repository.OrderRepository;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 
 public class OrderService {
     private final OrderRepository orderRepository;
@@ -24,9 +25,9 @@ public class OrderService {
     }
 
     private OrderDto convertToDto() {
-        int visitDay = orderRepository.findVisitDay();
+        int visitDay = OrderRepository.findVisitDay();
         Map<String, Integer> orders = orderRepository.findOrderList();
-        int totalAmount = orderRepository.findTotalAmount();
+        int totalAmount = OrderRepository.findTotalAmount();
         return new OrderDto(visitDay, orders, totalAmount);
     }
 
@@ -38,7 +39,7 @@ public class OrderService {
     }
 
     private int calculateAmount(Entry<String, Integer> orders) {
-        int price = MenuRepository.findMenuByName(orders.getKey()).price();
+        int price = Objects.requireNonNull(MenuRepository.findMenuByName(orders.getKey())).price();
         return orders.getValue() * price;
     }
 }

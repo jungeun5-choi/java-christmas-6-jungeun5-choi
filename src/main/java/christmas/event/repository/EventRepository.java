@@ -13,20 +13,20 @@ public class EventRepository {
         this.eventData.add(eventData);
     }
 
-    public static EventData findEventByEventType(EventType type) throws NullPointerException {
+    public static EventData findEventByEventType(EventType type) {
         for (EventData event : eventData) {
-            if (Objects.equals(type, event.eventType())) {
+            if (Objects.equals(type, event.type())) {
                 return event;
             }
         }
-        throw new NullPointerException();
+        return null;
     }
 
     public static int findEndDayByEventType(EventType type) {
-        return findEventByEventType(type).endDay();
+        return Objects.requireNonNull(findEventByEventType(type)).endDay();
     }
 
     public int findDefaultDiscountByEventType(EventType type) {
-        return findEventByEventType(type).defaultDiscount();
+        return Objects.requireNonNull(findEventByEventType(type)).defaultDiscount();
     }
 }

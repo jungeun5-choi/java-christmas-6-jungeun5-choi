@@ -7,9 +7,22 @@ import java.util.List;
 import java.util.Objects;
 
 public class BadgeRepository {
-    private List<BadgeData> badgeData = new ArrayList<>();
+    private static List<BadgeData> badgeData = new ArrayList<>();
 
     public void save(BadgeData badgeData) {
         this.badgeData.add(badgeData);
+    }
+
+    public static BadgeData findBadgeDataByBadgeType(BadgeType type) {
+        for (BadgeData badge : badgeData) {
+            if (Objects.equals(type, badge.type())) {
+                return badge;
+            }
+        }
+        return null;
+    }
+
+    public static int findRequiredAdvantageAmountByBadgeType(BadgeType type) {
+        return Objects.requireNonNull(findBadgeDataByBadgeType(type)).requiredAdvantageAmount();
     }
 }

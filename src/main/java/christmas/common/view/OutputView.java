@@ -66,7 +66,7 @@ public class OutputView {
     private void printAllAdvantages(List<EventData> eventData, Map<EventType, Integer> discounts) {
         for (EventData event : eventData) {
             System.out.printf(Message.PRINT_ADVANTAGE_LIST.message,
-                    event.name(), discounts.get(event.eventType()));
+                    event.name(), discounts.get(event.type()));
         }
     }
 

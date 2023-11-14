@@ -73,7 +73,7 @@ public class AdvantageService {
     private int discountByMenuType(int discount, MenuType type) {
         for (String name : orderRepository.findOrderMenuName()) {
             MenuData menuData = MenuRepository.findMenuByName(name);
-            if (Objects.equals(menuData.menuType(), type)) {
+            if (Objects.equals(menuData.type(), type)) {
                 discount += discount;
             }
         }
@@ -89,6 +89,13 @@ public class AdvantageService {
 
     public boolean hasAdvantage(EventType type) {
         return Objects.nonNull(advantageRepository.findAdvantageByEventType(type));
+    }
+
+    public boolean hasAdvantages() {
+        for (EventType eventType : EventType.values()) {
+            return Objects.nonNull(advantageRepository.findAdvantageByEventType(eventType));
+        }
+        return false;
     }
 
     public List<EventData> findAllAdvantages() {
