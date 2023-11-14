@@ -52,7 +52,7 @@ public class ApplicationContext {
         dateService = new DateService(dateRepository);
         eventService = new EventService(eventRepository);
         menuService = new MenuService(menuRepository);
-        badgeService = new BadgeService(badgeRepository);
+        badgeService = new BadgeService(badgeRepository, advantageRepository);
         orderService = new OrderService(orderRepository);
         advantageService = new AdvantageService(eventRepository, orderRepository, advantageRepository);
     }

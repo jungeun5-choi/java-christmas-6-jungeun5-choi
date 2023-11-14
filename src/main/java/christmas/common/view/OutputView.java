@@ -53,8 +53,17 @@ public class OutputView {
         }
     }
 
-    public void printAdvantageList(List<EventData> eventData, Map<EventType, Integer> discounts) {
+    public void printAdvantageList(List<EventData> eventData, Map<EventType, Integer> discounts, boolean hasAdvantage) {
         System.out.printf(Message.PRINT_ADVANTAGE_LIST_TITLE.message);
+        if (hasAdvantage) {
+            printAllAdvantages(eventData, discounts);
+        }
+        if (!hasAdvantage) {
+            System.out.printf(Message.PRINT_ADVANTAGE_EMPTY.message);
+        }
+    }
+
+    private void printAllAdvantages(List<EventData> eventData, Map<EventType, Integer> discounts) {
         for (EventData event : eventData) {
             System.out.printf(Message.PRINT_ADVANTAGE_LIST.message,
                     event.name(), discounts.get(event.eventType()));
@@ -71,8 +80,18 @@ public class OutputView {
         System.out.printf(Message.PRINT_FINAL_PAYMENT.message, amount);
     }
 
+    public void printAdvantageEmpty() {
+        System.out.printf(Message.PRINT_ADVANTAGE_AMOUNT_TITLE.message);
+
+    }
+
     public void printExceptionMessage(Exception exception) {
         System.out.println(exception.getMessage());
+    }
+
+    public void printBadge(String badgeName) {
+        System.out.printf(Message.PRINT_BADGE_TITLE.message);
+        System.out.printf(Message.PRINT_BADGE.message, badgeName);
     }
 
     private enum Message {
@@ -91,7 +110,7 @@ public class OutputView {
         PRINT_FINAL_PAYMENT_TITLE("\n<할인 후 예상 결제 금액>\n"),
         PRINT_FINAL_PAYMENT("%s원\n"),
         PRINT_BADGE_TITLE("\n<12월 이벤트 배지>\n"),
-        PRINT_BADGE("%s원\n"),
+        PRINT_BADGE("%s\n"),
         PRINT_ADVANTAGE_EMPTY("없음\n"),
         ;
 

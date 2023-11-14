@@ -28,6 +28,12 @@ public enum ApplicationState {
     PRESENT_EVENT_PLANNER {
         @Override
         public ApplicationState next() {
+            return PRESENT_BADGE;
+        }
+    },
+    PRESENT_BADGE {
+        @Override
+        public ApplicationState next() {
             return APPLICATION_QUIT;
         }
     },

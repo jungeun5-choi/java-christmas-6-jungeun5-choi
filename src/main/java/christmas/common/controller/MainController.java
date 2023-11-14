@@ -25,14 +25,15 @@ public class MainController {
     }
 
     private void setStateToController(DateController dateController, EventController eventController,
-                           MenuController menuController, BadgeController badgeController,
-                           OrderController orderController, AdvantageController advantageController) {
+                                      MenuController menuController, BadgeController badgeController,
+                                      OrderController orderController, AdvantageController advantageController) {
         controllers.put(ApplicationState.CREATE_DATA,
                 Arrays.asList(dateController, eventController, menuController, badgeController));
         controllers.put(ApplicationState.RECEIVE_ORDER_DATA, Collections.singletonList(orderController));
         controllers.put(ApplicationState.PRESENT_ORDER_DATA, Collections.singletonList(orderController));
         controllers.put(ApplicationState.PROCESS_EVENT_PLANNER, Collections.singletonList(advantageController));
         controllers.put(ApplicationState.PRESENT_EVENT_PLANNER, Collections.singletonList(advantageController));
+        controllers.put(ApplicationState.PRESENT_BADGE, Collections.singletonList(badgeController));
     }
 
     public void start() {
