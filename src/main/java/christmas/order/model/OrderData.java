@@ -1,13 +1,13 @@
 package christmas.order.model;
 
 import christmas.common.enumerator.ExceptionMessage;
+import christmas.menu.model.MenuData;
 import christmas.menu.repository.MenuRepository;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public record OrderData(int visitDay, Map<String, Integer> orders) {
-
     private static final int MIN_DAY = 1;
     private static final int MAX_DAY = 31;
 

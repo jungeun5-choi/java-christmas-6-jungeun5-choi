@@ -2,6 +2,7 @@ package christmas.common.controller;
 
 import christmas.badge.controller.BadgeController;
 import christmas.common.enumerator.ApplicationState;
+import christmas.common.view.OutputView;
 import christmas.date.controller.DateController;
 import christmas.event.controller.EventController;
 import christmas.eventPlanner.controller.EventPlannerController;
@@ -35,6 +36,7 @@ public class MainController {
     }
 
     public void start() {
+        printWelcomeMessage();
         ApplicationState currentState = ApplicationState.CREATE_DATA;
         while (currentState.isAvailable()) {
             currentState = run(currentState);
@@ -47,5 +49,9 @@ public class MainController {
             controller.executeState();
         }
         return currentState.next();
+    }
+
+    private void printWelcomeMessage() {
+        OutputView.getInstance().printWelcomeMessage();
     }
 }

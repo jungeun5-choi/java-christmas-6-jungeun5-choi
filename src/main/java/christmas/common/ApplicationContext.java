@@ -11,6 +11,7 @@ import christmas.event.controller.EventController;
 import christmas.event.repository.EventRepository;
 import christmas.event.service.EventService;
 import christmas.eventPlanner.controller.EventPlannerController;
+import christmas.eventPlanner.repository.EventPlannerRepository;
 import christmas.eventPlanner.service.EventPlannerService;
 import christmas.menu.controller.MenuController;
 import christmas.menu.repository.MenuRepository;
@@ -25,6 +26,7 @@ public class ApplicationContext {
     private MenuRepository menuRepository;
     private BadgeRepository badgeRepository;
     private OrderRepository orderRepository;
+    private EventPlannerRepository eventPlannerRepository;
     private DateService dateService;
     private EventService eventService;
     private MenuService menuService;
@@ -43,6 +45,7 @@ public class ApplicationContext {
         menuRepository = new MenuRepository();
         badgeRepository = new BadgeRepository();
         orderRepository = new OrderRepository();
+        eventPlannerRepository = new EventPlannerRepository();
     }
 
     private void initializeService() {
@@ -50,8 +53,8 @@ public class ApplicationContext {
         eventService = new EventService(eventRepository);
         menuService = new MenuService(menuRepository);
         badgeService = new BadgeService(badgeRepository);
-        orderService = new OrderService(orderRepository, menuRepository);
-        eventPlannerService = new EventPlannerService();
+        orderService = new OrderService(orderRepository);
+        eventPlannerService = new EventPlannerService(eventRepository, orderRepository, eventPlannerRepository);
     }
 
     public MainController InitializeController() {

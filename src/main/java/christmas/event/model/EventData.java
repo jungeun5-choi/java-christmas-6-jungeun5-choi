@@ -8,5 +8,4 @@ public record EventData(
         int discountIncreasePerDay,
         String reward,
         int endDay) {
-
 }

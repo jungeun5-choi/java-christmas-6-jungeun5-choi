@@ -4,6 +4,7 @@ import christmas.common.controller.Controller;
 import christmas.common.enumerator.ApplicationState;
 import christmas.common.view.InputView;
 import christmas.common.view.OutputView;
+import christmas.order.dto.OrderDto;
 import christmas.order.service.OrderService;
 import java.util.Map;
 
@@ -29,6 +30,8 @@ public class OrderController extends Controller {
     }
 
     public void present() {
-        OutputView.getInstance().printOrderResult(orderService.present());
+        OrderDto orderDto = orderService.present();
+        OutputView.getInstance().printAdvantagePreviewMessage(orderDto.getVisitDay());
+        OutputView.getInstance().printOrderResult(orderDto);
     }
 }
