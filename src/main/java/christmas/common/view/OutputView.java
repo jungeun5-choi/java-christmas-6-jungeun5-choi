@@ -3,6 +3,7 @@ package christmas.common.view;
 import christmas.common.enumerator.EventType;
 import christmas.event.model.EventData;
 import christmas.order.dto.OrderDto;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ public class OutputView {
 
     public void printAdvantagePreviewMessage(int visitDay) {
         System.out.printf(Message.PRINT_ADVANTAGE_PREVIEW.message + LINE_SEPARATOR, MONTH, visitDay);
+        System.out.printf(LINE_SEPARATOR);
     }
 
     public void printOrderResult(OrderDto orderDto) {
@@ -43,8 +45,9 @@ public class OutputView {
 
     private void printTotalOrderAmount(OrderDto orderDto) {
         System.out.printf(Message.PRINT_TOTAL_ORDER_AMOUNT_TITLE.message + LINE_SEPARATOR);
+        String formattedAmount = thousandFormatter(orderDto.getTotalOrderAmount());
         System.out.printf(Message.PRINT_TOTAL_ORDER_AMOUNT.message + LINE_SEPARATOR,
-                orderDto.getTotalOrderAmount());
+                formattedAmount);
         System.out.printf(LINE_SEPARATOR);
     }
 
@@ -74,20 +77,29 @@ public class OutputView {
 
     private void printAllAdvantages(List<EventData> eventData, Map<EventType, Integer> discounts) {
         for (EventData event : eventData) {
+            String formattedDiscount = thousandFormatter(discounts.get(event.type()));
             System.out.printf(Message.PRINT_ADVANTAGE_LIST.message + LINE_SEPARATOR,
-                    event.name(), discounts.get(event.type()));
+                    event.name(), formattedDiscount);
         }
     }
 
     public void printAdvantageAmount(int amount) {
         System.out.printf(Message.PRINT_ADVANTAGE_AMOUNT_TITLE.message + LINE_SEPARATOR);
-        System.out.printf(Message.PRINT_ADVANTAGE_AMOUNT.message + LINE_SEPARATOR, amount);
+        String formattedAmount = thousandFormatter(amount);
+        System.out.printf(Message.PRINT_ADVANTAGE_AMOUNT.message + LINE_SEPARATOR, formattedAmount);
         System.out.print(LINE_SEPARATOR);
     }
 
     public void printFinalPayment(int amount) {
         System.out.printf(Message.PRINT_FINAL_PAYMENT_TITLE.message + LINE_SEPARATOR);
-        System.out.printf(Message.PRINT_FINAL_PAYMENT.message + LINE_SEPARATOR, amount);
+        String formattedAmount = thousandFormatter(amount);
+        System.out.printf(Message.PRINT_FINAL_PAYMENT.message + LINE_SEPARATOR, formattedAmount);
+        System.out.print(LINE_SEPARATOR);
+    }
+
+    public void printBadge(String badgeName) {
+        System.out.printf(Message.PRINT_BADGE_TITLE.message + LINE_SEPARATOR);
+        System.out.printf(Message.PRINT_BADGE.message + LINE_SEPARATOR, badgeName);
         System.out.print(LINE_SEPARATOR);
     }
 
@@ -95,10 +107,9 @@ public class OutputView {
         System.out.println(exception.getMessage());
     }
 
-    public void printBadge(String badgeName) {
-        System.out.printf(Message.PRINT_BADGE_TITLE.message + LINE_SEPARATOR);
-        System.out.printf(Message.PRINT_BADGE.message + LINE_SEPARATOR, badgeName);
-        System.out.print(LINE_SEPARATOR);
+    private String thousandFormatter(double profitRate) {
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        return decimalFormat.format(profitRate);
     }
 
     private enum Message {
