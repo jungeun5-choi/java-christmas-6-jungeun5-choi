@@ -61,6 +61,11 @@ public class OutputView {
         }
     }
 
+    public void printAdvantageAmount(int amount) {
+        System.out.printf(Message.PRINT_ADVANTAGE_AMOUNT_TITLE.message);
+        System.out.printf(Message.PRINT_ADVANTAGE_AMOUNT.message, amount);
+    }
+
     public void printExceptionMessage(Exception exception) {
         System.out.println(exception.getMessage());
     }

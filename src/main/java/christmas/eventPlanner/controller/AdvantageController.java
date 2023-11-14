@@ -24,9 +24,9 @@ public class AdvantageController extends Controller {
     }
 
     public void present() {
-        printRewardList(); /* <증정 메뉴> */
-        printAdvantageList(); /* <혜택 내역> */
-        /* <총혜택 금액> */
+        printRewardList();      /* <증정 메뉴> */
+        printAdvantageList();   /* <혜택 내역> */
+        printAdvantageAmount(); /* <총혜택 금액> */
         /* <할인 후 예상 결제 금액> */
         /* <12월 이벤트 배지> */
     }
@@ -40,5 +40,10 @@ public class AdvantageController extends Controller {
         List<EventData> eventData = advantageService.findAllAdvantages();
         Map<EventType, Integer> discounts = advantageService.findAllDiscounts();
         OutputView.getInstance().printAdvantageList(eventData, discounts);
+    }
+
+    private void printAdvantageAmount() {
+        int amount = advantageService.calculateTotalDiscountAmount();
+        OutputView.getInstance().printAdvantageAmount(amount);
     }
 }

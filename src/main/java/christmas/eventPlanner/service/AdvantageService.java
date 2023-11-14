@@ -98,4 +98,11 @@ public class AdvantageService {
     public Map<EventType, Integer> findAllDiscounts() {
         return advantageRepository.findAllDiscounts();
     }
+
+    public int calculateTotalDiscountAmount() {
+        return findAllDiscounts().values()
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
 }
