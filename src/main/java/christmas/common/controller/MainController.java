@@ -5,7 +5,7 @@ import christmas.common.enumerator.ApplicationState;
 import christmas.common.view.OutputView;
 import christmas.date.controller.DateController;
 import christmas.event.controller.EventController;
-import christmas.eventPlanner.controller.AdvantageController;
+import christmas.event.controller.AdvantageController;
 import christmas.menu.controller.MenuController;
 import christmas.order.controller.OrderController;
 import java.util.Arrays;

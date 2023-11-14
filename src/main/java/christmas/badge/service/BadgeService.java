@@ -3,7 +3,7 @@ package christmas.badge.service;
 import christmas.badge.model.BadgeData;
 import christmas.badge.repository.BadgeRepository;
 import christmas.common.enumerator.BadgeType;
-import christmas.eventPlanner.repository.AdvantageRepository;
+import christmas.event.repository.AdvantageRepository;
 
 public class BadgeService {
     private static final String NULL = "없음";

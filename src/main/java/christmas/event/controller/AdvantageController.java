@@ -1,11 +1,11 @@
-package christmas.eventPlanner.controller;
+package christmas.event.controller;
 
 import christmas.common.controller.Controller;
 import christmas.common.enumerator.ApplicationState;
 import christmas.common.enumerator.EventType;
 import christmas.common.view.OutputView;
 import christmas.event.model.EventData;
-import christmas.eventPlanner.service.AdvantageService;
+import christmas.event.service.AdvantageService;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +39,8 @@ public class AdvantageController extends Controller {
     private void printAdvantageList() {
         List<EventData> eventData = advantageService.findAllAdvantages();
         Map<EventType, Integer> discounts = advantageService.findAllDiscounts();
-        OutputView.getInstance().printAdvantageList(eventData, discounts);
+        boolean hasAdvantage = advantageService.hasAdvantages();
+        OutputView.getInstance().printAdvantageList(eventData, discounts, hasAdvantage);
     }
 
     private void printAdvantageAmount() {

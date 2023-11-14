@@ -1,4 +1,4 @@
-package christmas.eventPlanner.repository;
+package christmas.event.repository;
 
 import christmas.common.enumerator.EventType;
 import christmas.event.model.EventData;
@@ -14,21 +14,21 @@ public class AdvantageRepository {
 
     public void save(EventData eventData, int discount) {
         advantages.add(eventData);
-        discounts.put(eventData.eventType(), discount);
+        discounts.put(eventData.type(), discount);
     }
 
     public EventData findAdvantageByEventType(EventType type) {
         for (EventData event : advantages) {
-            if (Objects.equals(type, event.eventType())) {
+            if (Objects.equals(type, event.type())) {
                 return event;
             }
         }
         return null;
     }
 
-    public int findDiscountByEventType(EventType type) throws NullPointerException {
+    public int findDiscountByEventType(EventType type) {
         if (!discounts.containsKey(type)) {
-            throw new NullPointerException();
+            return 0;
         }
         return discounts.get(type);
     }
@@ -39,5 +39,12 @@ public class AdvantageRepository {
 
     public Map<EventType, Integer> findAllDiscounts() {
         return discounts;
+    }
+
+    public int calculateTotalDiscountAmount() {
+        return findAllDiscounts().values()
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 }

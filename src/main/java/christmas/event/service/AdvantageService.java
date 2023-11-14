@@ -1,10 +1,10 @@
-package christmas.eventPlanner.service;
+package christmas.event.service;
 
 import christmas.common.enumerator.EventType;
 import christmas.common.enumerator.MenuType;
 import christmas.event.model.EventData;
 import christmas.event.repository.EventRepository;
-import christmas.eventPlanner.repository.AdvantageRepository;
+import christmas.event.repository.AdvantageRepository;
 import christmas.menu.model.MenuData;
 import christmas.menu.repository.MenuRepository;
 import christmas.order.repository.OrderRepository;

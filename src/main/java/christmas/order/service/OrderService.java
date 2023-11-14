@@ -16,8 +16,9 @@ public class OrderService {
     }
 
     public void save(int visitDay, Map<String, Integer> orders) {
+        OrderData order = new OrderData(visitDay, orders);
         int totalAmount = getTotalAmount(orders);
-        orderRepository.save(new OrderData(visitDay, orders), totalAmount);
+        orderRepository.save(order, totalAmount);
     }
 
     public OrderDto present() {
@@ -40,6 +41,10 @@ public class OrderService {
 
     private int calculateAmount(Entry<String, Integer> orders) {
         int price = Objects.requireNonNull(MenuRepository.findMenuByName(orders.getKey())).price();
+        return multiplyPerMenu(orders, price);
+    }
+
+    private int multiplyPerMenu(Entry<String, Integer> orders, int price) {
         return orders.getValue() * price;
     }
 }
