@@ -36,10 +36,10 @@ public class AdvantageController extends Controller {
     }
 
     private void printAdvantageList() {
-        List<EventData> eventData = advantageService.findAllAdvantages();
+        List<EventData> advantages = advantageService.findAllAdvantages();
         Map<EventType, Integer> discounts = advantageService.findAllDiscounts();
         boolean hasAdvantage = advantageService.hasAdvantages();
-        OutputView.getInstance().printAdvantageList(eventData, discounts, hasAdvantage);
+        OutputView.getInstance().printAdvantageList(advantages, discounts, hasAdvantage);
     }
 
     private void printAdvantageAmount() {
