@@ -9,6 +9,7 @@ import christmas.date.controller.DateController;
 import christmas.date.repository.DateRepository;
 import christmas.date.service.DateService;
 import christmas.event.controller.EventController;
+import christmas.event.repository.EventRepository;
 import christmas.event.service.EventService;
 import christmas.eventPlanner.controller.EventPlannerController;
 import christmas.eventPlanner.service.EventPlannerService;
@@ -21,6 +22,7 @@ import christmas.order.service.OrderService;
 
 public class ApplicationContext {
     private DateRepository dateRepository;
+    private EventRepository eventRepository;
     private MenuRepository menuRepository;
     private OrderRepository orderRepository;
     private DateService dateService;
@@ -43,7 +45,7 @@ public class ApplicationContext {
 
     private void initializeService() {
         dateService = new DateService(dateRepository);
-        eventService = new EventService();
+        eventService = new EventService(eventRepository);
         menuService = new MenuService(menuRepository);
         badgeService = new BadgeService();
         orderService = new OrderService(orderRepository, menuRepository);
@@ -55,10 +57,8 @@ public class ApplicationContext {
         EventController eventController = new EventController(eventService);
         MenuController menuController = new MenuController(menuService);
         BadgeController badgeController = new BadgeController(badgeService);
-        OrderController orderController = new OrderController(orderService, InputView.getInstance(),
-                OutputView.getInstance());
-        EventPlannerController eventPlannerController = new EventPlannerController(eventPlannerService,
-                OutputView.getInstance());
+        OrderController orderController = new OrderController(orderService);
+        EventPlannerController eventPlannerController = new EventPlannerController(eventPlannerService);
         return new MainController(dateController, eventController, menuController, badgeController, orderController,
                 eventPlannerController);
     }
