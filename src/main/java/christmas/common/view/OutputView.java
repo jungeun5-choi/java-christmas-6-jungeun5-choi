@@ -66,6 +66,11 @@ public class OutputView {
         System.out.printf(Message.PRINT_ADVANTAGE_AMOUNT.message, amount);
     }
 
+    public void printFinalPayment(int amount) {
+        System.out.printf(Message.PRINT_FINAL_PAYMENT_TITLE.message);
+        System.out.printf(Message.PRINT_FINAL_PAYMENT.message, amount);
+    }
+
     public void printExceptionMessage(Exception exception) {
         System.out.println(exception.getMessage());
     }

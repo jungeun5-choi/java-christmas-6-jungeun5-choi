@@ -105,4 +105,11 @@ public class AdvantageService {
                 .mapToInt(Integer::intValue)
                 .sum();
     }
+
+    public int calculateFinalPayment() {
+        int totalOrderAmount = OrderRepository.findTotalAmount();
+        int rewardAmount = advantageRepository.findDiscountByEventType(EventType.REWARD);
+        int totalDiscount = calculateTotalDiscountAmount() - rewardAmount;
+        return totalOrderAmount - totalDiscount;
+    }
 }
