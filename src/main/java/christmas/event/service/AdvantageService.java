@@ -3,8 +3,8 @@ package christmas.event.service;
 import christmas.common.enumerator.EventType;
 import christmas.common.enumerator.MenuType;
 import christmas.event.model.EventData;
-import christmas.event.repository.EventRepository;
 import christmas.event.repository.AdvantageRepository;
+import christmas.event.repository.EventRepository;
 import christmas.menu.model.MenuData;
 import christmas.menu.repository.MenuRepository;
 import christmas.order.repository.OrderRepository;
@@ -13,7 +13,9 @@ import java.util.Map;
 import java.util.Objects;
 
 public class AdvantageService {
-    private static final int INCREASE = 100;
+    private static final int AMOUNT_INCREASE = 100;
+    private static final int AMOUNT_REQUIRED_FOR_ADVANTAGE = 10000;
+
     private final EventRepository eventRepository;
     private final OrderRepository orderRepository;
     private final AdvantageRepository advantageRepository;
@@ -25,18 +27,26 @@ public class AdvantageService {
         this.advantageRepository = advantageRepository;
     }
 
-    /* process */
+    /*
+     * process
+     * 1. 크리스마스 디데이 할인
+     * 2. 평일 할인
+     * 3. 주말 할인
+     * 4. 특별 할인
+     * 5. 증정 이벤트
+     */
     public void process() {
-        /*
-         * 1. 크리스마스 디데이 할인
-         * 2. 평일 할인
-         * 3. 주말 할인
-         * 4. 특별 할인
-         * 5. 증정 이벤트
-         */
+        if (!isSatisfiedRequireAmount()) {
+            return;
+        }
+
         for (EventType type : EventType.values()) {
             verifyAdvantage(type);
         }
+    }
+
+    private boolean isSatisfiedRequireAmount() {
+        return OrderRepository.findTotalAmount() >= AMOUNT_REQUIRED_FOR_ADVANTAGE;
     }
 
     private void verifyAdvantage(EventType type) {
@@ -67,7 +77,7 @@ public class AdvantageService {
 
     private int discountIncreaseByDDay(int discount) {
         int visitDay = OrderRepository.findVisitDay() - 1;
-        return discount + (INCREASE * visitDay);
+        return discount + (AMOUNT_INCREASE * visitDay);
     }
 
     private int discountByMenuType(int discount, MenuType type) {
