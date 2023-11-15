@@ -1,5 +1,6 @@
 package christmas.common.util;
 
+import christmas.common.enumerator.ExceptionMessage;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -12,11 +13,15 @@ public class Util {
     private static final String DIGIT_NONE = "";
 
     public static Map<String, Integer> separateStringWithCommaAndHyphen(String input) {
-        return Arrays
-                .stream(removeSpaceAll(input).split(DIGIT_COMMA))
-                .map(entry -> entry.split(DIGIT_HYPHEN))
-                .collect(Collectors.toMap(parts -> parts[0],
-                        parts -> Integer.parseInt(parts[1])));
+        try {
+            return Arrays
+                    .stream(removeSpaceAll(input).split(DIGIT_COMMA))
+                    .map(entry -> entry.split(DIGIT_HYPHEN))
+                    .collect(Collectors.toMap(parts -> parts[0],
+                            parts -> Integer.parseInt(parts[1])));
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException | IllegalStateException exception) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_FORMAT.getMessage());
+        }
     }
 
     public static String removeSpaceAll(String numbers) {

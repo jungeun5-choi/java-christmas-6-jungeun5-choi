@@ -26,12 +26,8 @@ public class InputView {
     }
 
     public Map<String, Integer> readOrderList() {
-        try {
-            System.out.printf(Message.INPUT_ORDER_MENU_AND_COUNT.message);
-            return Util.separateStringWithCommaAndHyphen(Console.readLine());
-        } catch (ArrayIndexOutOfBoundsException | NumberFormatException exception) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_FORMAT.getMessage());
-        }
+        System.out.printf(Message.INPUT_ORDER_MENU_AND_COUNT.message);
+        return Util.separateStringWithCommaAndHyphen(Console.readLine());
     }
 
     private enum Message {
