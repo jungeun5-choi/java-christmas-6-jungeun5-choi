@@ -2,32 +2,13 @@ package christmas.common.enumerator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
-class ApplicationStateTest {
-    private PrintStream standardOut;
-    private OutputStream captor;
+class ApplicationStateTest extends NsTest {
+    @Override
+    protected void runMain() {
 
-    @BeforeEach
-    public void init() {
-        standardOut = System.out;
-        captor = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(captor));
-    }
-
-    @AfterEach
-    public void printOutput() {
-        System.setOut(standardOut);
-        System.out.println(output());
-    }
-
-    private String output() {
-        return captor.toString().trim();
     }
 
     @Test
