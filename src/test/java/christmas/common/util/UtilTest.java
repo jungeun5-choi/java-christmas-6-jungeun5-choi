@@ -38,7 +38,7 @@ class UtilTest {
     }
 
     @ParameterizedTest
-    @MethodSource("inputDuplicatedTest")
+    @MethodSource("inputDuplicatedValueProvider")
     void 입력_메뉴_중복_예외_테스트(String input) {
         assertThatThrownBy(() -> Util.separateStringWithCommaAndHyphen(input))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -46,14 +46,14 @@ class UtilTest {
     }
 
     @ParameterizedTest
-    @MethodSource("inputDuplicatedTest")
+    @MethodSource("inputDuplicatedValueProvider")
     void 입력_날짜_형식_예외_테스트(String input) {
         assertThatThrownBy(() -> Util.convertStringToInt(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.INVALID_DAY_FORMAT.getMessage());
     }
 
-    static Stream<Arguments> inputDuplicatedTest() {
+    static Stream<Arguments> inputDuplicatedValueProvider() {
         return Stream.of(
                 Arguments.of("a"),
                 Arguments.of("123981751241243145"),
