@@ -29,4 +29,8 @@ public class EventRepository {
     public int findDefaultDiscountByEventType(EventType type) {
         return Objects.requireNonNull(findEventByEventType(type)).defaultDiscount();
     }
+
+    public List<EventData> findAllEventData() {
+        return eventData;
+    }
 }

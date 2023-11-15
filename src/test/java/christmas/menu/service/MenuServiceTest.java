@@ -8,7 +8,6 @@ import christmas.menu.repository.MenuRepository;
 import org.junit.jupiter.api.Test;
 
 class MenuServiceTest extends NsTest {
-
     @Test
     void 메뉴_데이터_생성_테스트() {
         // given
