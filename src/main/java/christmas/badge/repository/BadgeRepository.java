@@ -25,4 +25,8 @@ public class BadgeRepository {
     public static int findRequiredAdvantageAmountByBadgeType(BadgeType type) {
         return Objects.requireNonNull(findBadgeDataByBadgeType(type)).requiredAdvantageAmount();
     }
+
+    public List<BadgeData> findAllBadgeData() {
+        return badgeData;
+    }
 }
