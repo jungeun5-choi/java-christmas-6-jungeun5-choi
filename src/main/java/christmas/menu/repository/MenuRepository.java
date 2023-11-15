@@ -11,12 +11,12 @@ public class MenuRepository {
         this.menuData.add(menuData);
     }
 
-    public static MenuData findMenuByName(String name) throws NullPointerException {
+    public static MenuData findMenuByName(String name) {
         for (MenuData menu : menuData) {
             if (menu.name().equals(name)) {
                 return menu;
             }
         }
-        throw new NullPointerException();
+        return null;
     }
 }

@@ -2,9 +2,10 @@ package christmas.common.controller;
 
 import christmas.badge.controller.BadgeController;
 import christmas.common.enumerator.ApplicationState;
+import christmas.common.view.OutputView;
 import christmas.date.controller.DateController;
 import christmas.event.controller.EventController;
-import christmas.eventPlanner.controller.EventPlannerController;
+import christmas.event.controller.AdvantageController;
 import christmas.menu.controller.MenuController;
 import christmas.order.controller.OrderController;
 import java.util.Arrays;
@@ -18,23 +19,25 @@ public class MainController {
 
     public MainController(DateController dateController, EventController eventController, MenuController menuController,
                           BadgeController badgeController, OrderController orderController,
-                          EventPlannerController eventPlannerController) {
+                          AdvantageController advantageController) {
         setStateToController(dateController, eventController, menuController, badgeController, orderController,
-                eventPlannerController);
+                advantageController);
     }
 
     private void setStateToController(DateController dateController, EventController eventController,
-                           MenuController menuController, BadgeController badgeController,
-                           OrderController orderController, EventPlannerController eventPlannerController) {
+                                      MenuController menuController, BadgeController badgeController,
+                                      OrderController orderController, AdvantageController advantageController) {
         controllers.put(ApplicationState.CREATE_DATA,
                 Arrays.asList(dateController, eventController, menuController, badgeController));
         controllers.put(ApplicationState.RECEIVE_ORDER_DATA, Collections.singletonList(orderController));
         controllers.put(ApplicationState.PRESENT_ORDER_DATA, Collections.singletonList(orderController));
-        controllers.put(ApplicationState.PROCESS_EVENT_PLANNER, Collections.singletonList(eventPlannerController));
-        controllers.put(ApplicationState.PRESENT_EVENT_PLANNER, Collections.singletonList(eventPlannerController));
+        controllers.put(ApplicationState.PROCESS_EVENT_PLANNER, Collections.singletonList(advantageController));
+        controllers.put(ApplicationState.PRESENT_EVENT_PLANNER, Collections.singletonList(advantageController));
+        controllers.put(ApplicationState.PRESENT_BADGE, Collections.singletonList(badgeController));
     }
 
     public void start() {
+        printWelcomeMessage();
         ApplicationState currentState = ApplicationState.CREATE_DATA;
         while (currentState.isAvailable()) {
             currentState = run(currentState);
@@ -47,5 +50,9 @@ public class MainController {
             controller.executeState();
         }
         return currentState.next();
+    }
+
+    private void printWelcomeMessage() {
+        OutputView.getInstance().printWelcomeMessage();
     }
 }

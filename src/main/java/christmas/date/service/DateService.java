@@ -14,7 +14,6 @@ public class DateService {
     private static final int DAY_OF_MONTH = 1;
     private static final int NEXT = 1;
 
-
     private final DateRepository dateRepository;
 
     public DateService(DateRepository dateRepository) {
