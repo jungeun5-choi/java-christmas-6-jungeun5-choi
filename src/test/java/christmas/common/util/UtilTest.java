@@ -45,11 +45,19 @@ class UtilTest {
                 .hasMessageContaining(ExceptionMessage.INVALID_ORDER_FORMAT.getMessage());
     }
 
+    @ParameterizedTest
+    @MethodSource("inputDuplicatedTest")
+    void 입력_날짜_형식_예외_테스트(String input) {
+        assertThatThrownBy(() -> Util.convertStringToInt(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ExceptionMessage.INVALID_DAY_FORMAT.getMessage());
+    }
+
     static Stream<Arguments> inputDuplicatedTest() {
         return Stream.of(
-                Arguments.of("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1,제로콜라-1"),
-                Arguments.of("티본스테이크-1,바비큐립-1,초코케이크-1,바비큐립-1"),
-                Arguments.of("레드와인-1,시저샐러드-1,레드와인-1,크리스마스파스타-1")
+                Arguments.of("a"),
+                Arguments.of("123981751241243145"),
+                Arguments.of("353po295AAA4o932865123")
         );
     }
 }

@@ -27,4 +27,12 @@ public class Util {
     public static String removeSpaceAll(String numbers) {
         return numbers.replaceAll(String.valueOf(REGEX_BLANK), DIGIT_NONE);
     }
+
+    public static int convertStringToInt(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_DAY_FORMAT.getMessage());
+        }
+    }
 }
