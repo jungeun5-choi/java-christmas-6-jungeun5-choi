@@ -47,9 +47,9 @@ class OrderValidatorTest {
 
     static Stream<Arguments> visitDayProvider() {
         return Stream.of(
-                Arguments.of(Map.of("타파스", 1, "제로콜라", 1)),
-                Arguments.of(Map.of("타파스", 1, "제로콜라", 2)),
-                Arguments.of(Map.of("타파스", 1, "제로콜라", 2))
+                Arguments.of(32, Map.of("타파스", 1, "제로콜라", 1)),
+                Arguments.of(0, Map.of("타파스", 1, "제로콜라", 2)),
+                Arguments.of(-1, Map.of("타파스", 1, "제로콜라", 2))
         );
     }
 
