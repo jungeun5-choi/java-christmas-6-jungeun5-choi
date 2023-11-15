@@ -6,11 +6,6 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
 class ApplicationStateTest extends NsTest {
-    @Override
-    protected void runMain() {
-
-    }
-
     @Test
     void 상태_전환_테스트() {
         // given
@@ -35,5 +30,10 @@ class ApplicationStateTest extends NsTest {
     private ApplicationState run(ApplicationState currentState) {
         System.out.println(currentState);
         return currentState.next();
+    }
+
+    @Override
+    protected void runMain() {
+
     }
 }

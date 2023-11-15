@@ -11,11 +11,6 @@ class DateServiceTest extends NsTest {
     private static final int DECEMBER_FIRST = 1;
     private static final int DECEMBER_LAST = 31;
 
-    @Override
-    protected void runMain() {
-
-    }
-
     @Test
     void 날짜_데이터_생성_테스트() {
         // given
@@ -26,7 +21,7 @@ class DateServiceTest extends NsTest {
         for (int i = DECEMBER_FIRST; i <= DECEMBER_LAST; i++) {
             DayData day = DateRepository.findDayData(i);
             System.out.printf("isWeekend: %s", day.isWeekend());
-            System.out.printf(" / isSpecial: %s\n", day.isSpecial());
+            System.out.printf(" / isSpecial: %s", day.isSpecial());
         }
 
         // then
@@ -66,5 +61,10 @@ class DateServiceTest extends NsTest {
                 isWeekend: true / isSpecial: false
                 isWeekend: true / isSpecial: false
                 isWeekend: false / isSpecial: false""";
+    }
+
+    @Override
+    protected void runMain() {
+
     }
 }
