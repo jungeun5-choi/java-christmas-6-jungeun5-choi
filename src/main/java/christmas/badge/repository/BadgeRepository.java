@@ -29,4 +29,8 @@ public class BadgeRepository {
     public List<BadgeData> findAllBadgeData() {
         return badgeData;
     }
+
+    public void clearAll() {
+        badgeData.clear();
+    }
 }
