@@ -31,7 +31,12 @@ public class OrderController extends Controller {
 
     public void present() {
         OrderDto orderDto = orderService.present();
+        printOrderResult(orderDto);
+    }
+
+    private void printOrderResult(OrderDto orderDto) {
         OutputView.getInstance().printAdvantagePreviewMessage(orderDto.getVisitDay());
-        OutputView.getInstance().printOrderResult(orderDto);
+        OutputView.getInstance().printOrderList(orderDto);
+        OutputView.getInstance().printTotalOrderAmount(orderDto);
     }
 }

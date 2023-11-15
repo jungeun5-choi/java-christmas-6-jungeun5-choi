@@ -1,7 +1,6 @@
 package christmas.common.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.common.enumerator.ExceptionMessage;
 import christmas.common.util.Util;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -17,21 +16,13 @@ public class InputView {
     private static final int MONTH = 12;
 
     public int readVisitDay() {
-        try {
-            System.out.printf(Message.INPUT_VISIT_DAY.message, MONTH);
-            return Integer.parseInt(Console.readLine());
-        } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_DAY_FORMAT.getMessage());
-        }
+        System.out.printf(Message.INPUT_VISIT_DAY.message, MONTH);
+        return Util.convertStringToInt(Console.readLine());
     }
 
     public Map<String, Integer> readOrderList() {
-        try {
-            System.out.printf(Message.INPUT_ORDER_MENU_AND_COUNT.message);
-            return Util.separateStringWithCommaAndHyphen(Console.readLine());
-        } catch (ArrayIndexOutOfBoundsException | NumberFormatException exception) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_FORMAT.getMessage());
-        }
+        System.out.printf(Message.INPUT_ORDER_MENU_AND_COUNT.message);
+        return Util.separateStringWithCommaAndHyphen(Console.readLine());
     }
 
     private enum Message {

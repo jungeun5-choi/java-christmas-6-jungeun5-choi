@@ -29,12 +29,7 @@ public class OutputView {
         System.out.printf(LINE_SEPARATOR);
     }
 
-    public void printOrderResult(OrderDto orderDto) {
-        printOrderList(orderDto);
-        printTotalOrderAmount(orderDto);
-    }
-
-    private void printOrderList(OrderDto orderDto) {
+    public void printOrderList(OrderDto orderDto) {
         System.out.printf(Message.PRINT_ORDER_LIST_TITLE.message + LINE_SEPARATOR);
         for (Map.Entry<String, Integer> entry : orderDto.getOrders().entrySet()) {
             System.out.printf(Message.PRINT_MENU_LIST.message + LINE_SEPARATOR,
@@ -43,7 +38,7 @@ public class OutputView {
         System.out.printf(LINE_SEPARATOR);
     }
 
-    private void printTotalOrderAmount(OrderDto orderDto) {
+    public void printTotalOrderAmount(OrderDto orderDto) {
         System.out.printf(Message.PRINT_TOTAL_ORDER_AMOUNT_TITLE.message + LINE_SEPARATOR);
         String formattedAmount = thousandFormatter(orderDto.getTotalOrderAmount());
         System.out.printf(Message.PRINT_AMOUNT.message + LINE_SEPARATOR,
